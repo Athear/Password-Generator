@@ -1,4 +1,3 @@
-// Assignment Code
 var generateBtn = document.querySelector("#generate");
 
 //object for storing password option input
@@ -15,7 +14,6 @@ var characterTypes = {
   "special" : ["!","@","#","$","%","^","&","*","(",")","[","]","{","}","<",">","~","+","_","=","-"]
 }
 
-
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
@@ -25,17 +23,19 @@ function writePassword() {
 
 }
 
-var passwordOptions = {
-  "charaterSet" : [],
-  "passwordLength" : 8
-}
 
 function generatePassword(){
-
-
+  //reset passwordOptions here
+  getPasswordLength();
 }
 
-function getPasswordLenght
+function getPasswordLength(){
+  var dummyLength = 0;
+  while (!(dummyLength>=8 && dummyLength<=128)){
+    dummyLength = parseInt(prompt("Enter desired password length (8-128). No cancelling!"));
+  }
+  return dummyLength
+}
 
 
 // Add event listener to generate button
