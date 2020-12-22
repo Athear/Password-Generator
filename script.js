@@ -26,7 +26,8 @@ function writePassword() {
 
 function generatePassword(){
   //reset passwordOptions here
-  getPasswordLength();
+  //getPasswordLength();
+  getCharacterTypes();
 }
 
 function getPasswordLength(){
@@ -34,7 +35,45 @@ function getPasswordLength(){
   while (!(dummyLength>=8 && dummyLength<=128)){
     dummyLength = parseInt(prompt("Enter desired password length (8-128). No cancelling!"));
   }
-  return dummyLength
+  console.log(dummyLength); //DEBUG
+  return dummyLength;
+}
+
+function getCharacterTypes(){
+  var upperCase = false;
+  var lowerCase = false;
+  var numbers = false;
+  var specialChars = false;
+  var totalCharacterSet = [];
+
+  //at least one selection must be true
+  //possibly push inside the while loop and test for 0 length array?
+  while(!upperCase && !lowerCase && !numbers && !specialChars){
+    alert("Please choose at least one set of characters too include in your password. It is recommended to include all.");
+    upperCase = confirm("Include upper case letters?");
+    lowerCase = confirm("Include lower case letters?");
+    numbers = confirm("Include numbers?");
+    specialChars = confirm("Include special characters?");
+  }
+  console.log(upperCase + " " + lowerCase + " " + numbers +" " + specialChars); //DEBUG
+
+  //mash all the selected character types into one array!
+  if(upperCase){
+    totalCharacterSet = totalCharacterSet.concat(characterTypes.upper);
+  }
+  if(lowerCase){
+    totalCharacterSet = totalCharacterSet.concat(characterTypes.lower);
+  }
+  if(numbers){
+    totalCharacterSet = totalCharacterSet.concat(characterTypes.numeric);
+  }
+  if(specialChars){
+    totalCharacterSet = totalCharacterSet.concat(characterTypes.special);
+  }
+
+  console.log(totalCharacterSet);//DEBUG
+  return totalCharacterSet;
+
 }
 
 
