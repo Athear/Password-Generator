@@ -23,11 +23,20 @@ function writePassword() {
 
 }
 
-
 function generatePassword(){
   //reset passwordOptions here
-  //getPasswordLength();
-  getCharacterTypes();
+  var pwLength = getPasswordLength();
+  var pwCharSet = getCharacterTypes();
+
+  //actually generate the password
+  var passwordBuilder = "";
+
+  for(var i = 0; i<pwLength; i++){
+    //console.log(pwCharSet[Math.floor(Math.random()*pwCharSet.length)]); //DEBUG
+    passwordBuilder = passwordBuilder + pwCharSet[Math.floor(Math.random()*pwCharSet.length)]
+  }
+  console.log(passwordBuilder);
+  return passwordBuilder;
 }
 
 function getPasswordLength(){
@@ -47,7 +56,7 @@ function getCharacterTypes(){
   var totalCharacterSet = [];
 
   //at least one selection must be true
-  //possibly push inside the while loop and test for 0 length array?
+  //TODO - possibly push inside the while loop and test for 0 length array?
   while(!upperCase && !lowerCase && !numbers && !specialChars){
     alert("Please choose at least one set of characters too include in your password. It is recommended to include all.");
     upperCase = confirm("Include upper case letters?");
