@@ -35,17 +35,17 @@ function generatePassword(){
     //console.log(pwCharSet[Math.floor(Math.random()*pwCharSet.length)]); //DEBUG
     passwordBuilder = passwordBuilder + pwCharSet[Math.floor(Math.random()*pwCharSet.length)]
   }
-  console.log(passwordBuilder);
+  console.log(passwordBuilder); //DEBUG
   return passwordBuilder;
 }
 
 function getPasswordLength(){
-  var dummyLength = 0;
-  while (!(dummyLength>=8 && dummyLength<=128)){
-    dummyLength = parseInt(prompt("Enter desired password length (8-128). No cancelling!"));
+  var inputLength = 0;
+  while (!(inputLength>=8 && inputLength<=128)){
+    inputLength = parseInt(prompt("Enter desired password length (8-128). No cancelling!"));
   }
-  console.log(dummyLength); //DEBUG
-  return dummyLength;
+  console.log(inputLength); //DEBUG
+  return inputLength;
 }
 
 function getCharacterTypes(){
