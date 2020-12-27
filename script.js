@@ -26,7 +26,7 @@ function writePassword() {
 function generatePassword(){
   //reset passwordOptions here
   var pwLength = getPasswordLength();
-  var pwCharSet = getCharacterTypes();
+  var pwCharSet = getCharacterTypesCompact();
 
   //actually generate the password
   var passwordBuilder = "";
@@ -56,7 +56,6 @@ function getCharacterTypes(){
   var totalCharacterSet = [];
 
   //at least one selection must be true
-  //TODO - possibly push inside the while loop and test for 0 length array?
   while(!upperCase && !lowerCase && !numbers && !specialChars){
     alert("Please choose at least one set of characters too include in your password. It is recommended to include all.");
     upperCase = confirm("Include upper case letters?");
@@ -83,6 +82,32 @@ function getCharacterTypes(){
   console.log(totalCharacterSet);//DEBUG
   return totalCharacterSet;
 
+}
+
+
+function getCharacterTypesCompact(){
+  var totalCharacterSet = [];
+
+  //must inclue at least one set of characters.
+  while (totalCharacterSet.length === 0){
+    alert("Please choose at least one set of characters too include in your password. It is recommended to include all.");
+    //Prompt for each character type to include in final set.
+    if(confirm("Include upper case letters?")){
+      totalCharacterSet = totalCharacterSet.concat(characterTypes.upper);
+    }
+    if(confirm("Include lower case letters?")){
+      totalCharacterSet = totalCharacterSet.concat(characterTypes.lower);
+    }
+    if(confirm("Include numbers?")){
+      totalCharacterSet = totalCharacterSet.concat(characterTypes.numeric);
+    }
+    if(confirm("Include special characters?")){
+      totalCharacterSet = totalCharacterSet.concat(characterTypes.special);
+    }
+  }
+
+  console.log(totalCharacterSet);//DEBUG
+  return totalCharacterSet;
 }
 
 
