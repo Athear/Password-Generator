@@ -16,10 +16,12 @@ var characterTypes = {
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+  // var password = generatePassword();
+  // var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
+  getCharacterTypesForm();
+
+  // passwordText.value = password;
 
 }
 
@@ -39,6 +41,7 @@ function generatePassword(){
   return passwordBuilder;
 }
 
+
 function getPasswordLength(){
   var inputLength = 0;
   while (!(inputLength>=8 && inputLength<=128)){
@@ -47,6 +50,7 @@ function getPasswordLength(){
   console.log(inputLength); //DEBUG
   return inputLength;
 }
+
 
 function getCharacterTypes(){
   var upperCase = false;
@@ -108,6 +112,93 @@ function getCharacterTypesCompact(){
 
   console.log(totalCharacterSet);//DEBUG
   return totalCharacterSet;
+}
+
+
+function getCharacterTypesForm(){
+  var theForm = createForm();
+  document.body.prepend(theForm);
+  var otherContent = document.querySelector(".wrapper");
+  otherContent.setAttribute("style","display:none");
+
+   var formElements = theForm.children;
+   //for loop to hit the checkboxes; +2 will skip labels
+  //  for(i=0;i<formElements.length;i=i+2){
+  //    formElements[i].setAttribute("style","?");
+  //  }
+
+}
+
+function createForm(){
+  //create container for checklist. Not an actual HTML form.
+  var typeForm = document.createElement("form");
+  typeForm.className = "typeForm";
+  //typeForm.textContent = "hey I exist"; //DEBUG
+  typeForm.setAttribute("style", "position: relative");
+
+  //create checkboxes
+  var upperCheck = document.createElement("input");
+  upperCheck.type = "checkbox";
+  upperCheck.id = "upperCheck";
+  var upperLabel = document.createElement("Label")
+  upperLabel.for = "upperCheck";
+  upperLabel.textContent = "Use upper case characters";
+  
+  var lowerCheck = document.createElement("input");
+  lowerCheck.type = "checkbox";
+  lowerCheck.id = "lowerCheck";
+  var lowerLabel = document.createElement("Label")
+  lowerLabel.for = "lowerCheck";
+  lowerLabel.textContent = "Use lower case characters";
+
+  var numberCheck = document.createElement("input");
+  numberCheck.type = "checkbox";
+  numberCheck.id = "numberCheck";
+  var numberLabel = document.createElement("Label")
+  numberLabel.for = "numberCheck";
+  numberLabel.textContent = "Use numeric characters";
+
+  var specCheck = document.createElement("input");
+  specCheck.type = "checkbox";
+  specCheck.id = "specCheck";
+  var specLabel = document.createElement("Label")
+  specLabel.for = "specCheck";
+  specLabel.textContent = "Use special characters";
+
+  //submission button. Not a form input.
+  var submitButton = document.createElement("button");
+  submitButton.id = "submitButton";
+  submitButton.textContent = "Submit character selections";
+
+  //Add all elements to the form
+  typeForm.append(upperCheck);
+  typeForm.append(upperLabel);
+  //typeForm.append(document.createElement("br")); //TODO: this is messy, use css
+  typeForm.append(lowerCheck);
+  typeForm.append(lowerLabel);
+
+  typeForm.append(numberCheck);
+  typeForm.append(numberLabel);
+
+  typeForm.append(specCheck);
+  typeForm.append(specLabel);
+
+  typeForm.append(submitButton);
+  //do some styling
+
+  var formElements = typeForm.children;
+  for(i=0;i<formElements.length;i++){
+    //styles for only the checkboxes (even numbers only)
+    if(i%2===0){
+      formElements[i].setAttribute("style","display: inline-block");
+    }
+    else{
+      formElements[i].setAttribute("style","display: inline-block");
+    }
+  }
+
+
+  return typeForm
 }
 
 
