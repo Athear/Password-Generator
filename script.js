@@ -117,15 +117,12 @@ function getCharacterTypesCompact(){
 
 function getCharacterTypesForm(){
   var theForm = createForm();
-  document.body.prepend(theForm);
-  var otherContent = document.querySelector(".wrapper");
-  otherContent.setAttribute("style","display:none");
-
-   var formElements = theForm.children;
-   //for loop to hit the checkboxes; +2 will skip labels
-  //  for(i=0;i<formElements.length;i=i+2){
-  //    formElements[i].setAttribute("style","?");
-  //  }
+  //document.body.prepend(theForm);
+  var cardBody = document.querySelector(".card-body");
+  cardBody.append(theForm);
+  generateBtn.disabled = true
+  //var otherContent = document.querySelector(".wrapper");
+  //otherContent.setAttribute("style","display:none");
 
 }
 
@@ -134,7 +131,7 @@ function createForm(){
   var typeForm = document.createElement("div");
   typeForm.className = "typeForm";
   //typeForm.textContent = "hey I exist"; //DEBUG
-  typeForm.setAttribute("style", "position: relative");
+  typeForm.setAttribute("style", "background-color:#f5fff5");
 
   //create checkboxes with labels and containers
   var upperCheck = document.createElement("input");
@@ -186,15 +183,26 @@ function createForm(){
   var submitButton = document.createElement("button");
   submitButton.id = "submitButton";
   submitButton.textContent = "Submit character selections";
-  submitButton.setAttribute("onclick"," ");
+  submitButton.setAttribute("class","btn");
+  // event listener for character sets
+  submitButton.addEventListener("click", writePassword);  
+  
+  var submitContainer = document.createElement("div");
+  submitContainer.append(submitButton);
 
   //Add all elements to the form
   typeForm.append(upperContainer);
   typeForm.append(lowerContainer);
   typeForm.append(numberContainer);
   typeForm.append(specContainer);
+  typeForm.append(submitContainer);
 
-  typeForm.append(submitButton);
+  //do any styling
+  var formElements = typeForm.children;
+  for(i=0;i<formElements.length-1;i++){
+    formElements[i].setAttribute("style","padding-left: 33%");
+  }
+  submitContainer.setAttribute("style", "text-align: center");
 
   return typeForm
 }
