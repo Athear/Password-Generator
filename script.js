@@ -136,7 +136,7 @@ function createForm(){
   //typeForm.textContent = "hey I exist"; //DEBUG
   typeForm.setAttribute("style", "position: relative");
 
-  //create checkboxes
+  //create checkboxes with labels and containers
   var upperCheck = document.createElement("input");
   upperCheck.type = "checkbox";
   upperCheck.id = "upperCheck";
@@ -144,6 +144,9 @@ function createForm(){
   var upperLabel = document.createElement("Label")
   upperLabel.setAttribute("for","upperCheck");
   upperLabel.textContent = "Use upper case characters";
+  var upperContainer = document.createElement("div");
+  upperContainer.append(upperCheck);
+  upperContainer.append(upperLabel);
   
   var lowerCheck = document.createElement("input");
   lowerCheck.type = "checkbox";
@@ -152,6 +155,10 @@ function createForm(){
   var lowerLabel = document.createElement("Label")
   lowerLabel.setAttribute("for","lowerCheck");
   lowerLabel.textContent = "Use lower case characters";
+  var lowerContainer = document.createElement("div")
+  lowerContainer.append(lowerCheck);
+  lowerContainer.append(lowerLabel);
+
 
   var numberCheck = document.createElement("input");
   numberCheck.type = "checkbox";
@@ -160,6 +167,9 @@ function createForm(){
   var numberLabel = document.createElement("Label")
   numberLabel.setAttribute("for","numberCheck");
   numberLabel.textContent = "Use numeric characters";
+  numberContainer = document.createElement("div")
+  numberContainer.append(numberCheck);
+  numberContainer.append(numberLabel);
 
   var specCheck = document.createElement("input");
   specCheck.type = "checkbox";
@@ -168,6 +178,9 @@ function createForm(){
   var specLabel = document.createElement("Label")
   specLabel.setAttribute("for","specCheck");
   specLabel.textContent = "Use special characters";
+  var specContainer = document.createElement("div")
+  specContainer.append(specCheck);
+  specContainer.append(specLabel);
 
   //submission button. Not a form input.
   var submitButton = document.createElement("button");
@@ -176,32 +189,12 @@ function createForm(){
   submitButton.setAttribute("onclick"," ");
 
   //Add all elements to the form
-  typeForm.append(upperCheck);
-  typeForm.append(upperLabel);
-  //typeForm.append(document.createElement("br")); //TODO: this is messy, use css
-  typeForm.append(lowerCheck);
-  typeForm.append(lowerLabel);
-
-  typeForm.append(numberCheck);
-  typeForm.append(numberLabel);
-
-  typeForm.append(specCheck);
-  typeForm.append(specLabel);
+  typeForm.append(upperContainer);
+  typeForm.append(lowerContainer);
+  typeForm.append(numberContainer);
+  typeForm.append(specContainer);
 
   typeForm.append(submitButton);
-  //do some styling
-
-  var formElements = typeForm.children;
-  for(i=0;i<formElements.length;i++){
-    //styles for only the checkboxes (even numbers only)
-    if(i%2===0){
-      formElements[i].setAttribute("style","display: inline-block");
-    }
-    else{
-      formElements[i].setAttribute("style","display: inline-block");
-    }
-  }
-
 
   return typeForm
 }
