@@ -131,7 +131,7 @@ function getCharacterTypesForm(){
 
 function createForm(){
   //create container for checklist. Not an actual HTML form.
-  var typeForm = document.createElement("form");
+  var typeForm = document.createElement("div");
   typeForm.className = "typeForm";
   //typeForm.textContent = "hey I exist"; //DEBUG
   typeForm.setAttribute("style", "position: relative");
@@ -173,6 +173,7 @@ function createForm(){
   var submitButton = document.createElement("button");
   submitButton.id = "submitButton";
   submitButton.textContent = "Submit character selections";
+  submitButton.setAttribute("onclick"," ");
 
   //Add all elements to the form
   typeForm.append(upperCheck);
