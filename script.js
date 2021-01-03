@@ -140,29 +140,33 @@ function createForm(){
   var upperCheck = document.createElement("input");
   upperCheck.type = "checkbox";
   upperCheck.id = "upperCheck";
+  upperCheck.name = "upperCheck";
   var upperLabel = document.createElement("Label")
-  upperLabel.for = "upperCheck";
+  upperLabel.setAttribute("for","upperCheck");
   upperLabel.textContent = "Use upper case characters";
   
   var lowerCheck = document.createElement("input");
   lowerCheck.type = "checkbox";
   lowerCheck.id = "lowerCheck";
+  lowerCheck.name = "lowerCheck";
   var lowerLabel = document.createElement("Label")
-  lowerLabel.for = "lowerCheck";
+  lowerLabel.setAttribute("for","lowerCheck");
   lowerLabel.textContent = "Use lower case characters";
 
   var numberCheck = document.createElement("input");
   numberCheck.type = "checkbox";
   numberCheck.id = "numberCheck";
+  numberCheck.name = "numberCheck";
   var numberLabel = document.createElement("Label")
-  numberLabel.for = "numberCheck";
+  numberLabel.setAttribute("for","numberCheck");
   numberLabel.textContent = "Use numeric characters";
 
   var specCheck = document.createElement("input");
   specCheck.type = "checkbox";
   specCheck.id = "specCheck";
+  specCheck.name = "specCheck";
   var specLabel = document.createElement("Label")
-  specLabel.for = "specCheck";
+  specLabel.setAttribute("for","specCheck");
   specLabel.textContent = "Use special characters";
 
   //submission button. Not a form input.
