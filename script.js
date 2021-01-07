@@ -168,6 +168,7 @@ function CharacterTypesForm(){
   upperCheck.type = "checkbox";
   upperCheck.id = "upperCheck";
   upperCheck.name = "upperCheck";
+  upperCheck.checked = true;
   var upperLabel = document.createElement("Label")
   upperLabel.setAttribute("for","upperCheck");
   upperLabel.textContent = "Use upper case characters";
@@ -179,6 +180,7 @@ function CharacterTypesForm(){
   lowerCheck.type = "checkbox";
   lowerCheck.id = "lowerCheck";
   lowerCheck.name = "lowerCheck";
+  lowerCheck.checked = true;
   var lowerLabel = document.createElement("Label")
   lowerLabel.setAttribute("for","lowerCheck");
   lowerLabel.textContent = "Use lower case characters";
@@ -191,6 +193,7 @@ function CharacterTypesForm(){
   numberCheck.type = "checkbox";
   numberCheck.id = "numberCheck";
   numberCheck.name = "numberCheck";
+  numberCheck.checked = true;
   var numberLabel = document.createElement("Label")
   numberLabel.setAttribute("for","numberCheck");
   numberLabel.textContent = "Use numeric characters";
@@ -202,6 +205,7 @@ function CharacterTypesForm(){
   specCheck.type = "checkbox";
   specCheck.id = "specCheck";
   specCheck.name = "specCheck";
+  specCheck.checked = true;
   var specLabel = document.createElement("Label")
   specLabel.setAttribute("for","specCheck");
   specLabel.textContent = "Use special characters";
@@ -229,17 +233,44 @@ function CharacterTypesForm(){
   typeForm.append(specContainer);
   typeForm.append(submitContainer);
 
-  //do any styling
   var formElements = typeForm.children;
+
+  //add listener to checkboxes
+  for(i=1;i<formElements.length-1;i++){
+    
+    formElements[i].children[0].addEventListener("click",checkboxValidate);
+  }
+
+  //do styling
   for(i=0;i<formElements.length-1;i++){
     //TODO- this is not responsive
     formElements[i].setAttribute("style","padding-left: 33%"); 
   }
   submitContainer.setAttribute("style", "text-align: center");
-
   return typeForm
 }
 
+function checkboxValidate(){
+  var formElements = document.querySelector(".typeForm").children
+  var atLeastOne = false
+
+  //Validate that at least one checkbox is checked
+  for(i=1;i<formElements.length-1;i++){
+    if(formElements[i].children[0].checked){
+      atLeastOne = true;
+    }
+  }
+  //disable the submit button if no boxes are checked.
+  if(atLeastOne){
+    formElements[5].children[0].disabled = false;
+    formElements[5].children[0].textContent = "Submit character selections"
+    
+  }
+  else{
+    formElements[5].children[0].disabled = true;
+    formElements[5].children[0].textContent = "Select one or more character types"
+  }
+}
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", OptionsForm);
