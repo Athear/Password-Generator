@@ -16,19 +16,19 @@ var characterTypes = {
 
 // Write password to the #password input
 function writePassword() {
-  // var password = generatePassword();
-  // var passwordText = document.querySelector("#password");
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password");
 
-  getCharacterTypesForm();
-
-  // passwordText.value = password;
+  
+  generateBtn.disabled = false
+  //passwordText.value = password;
 
 }
 
 function generatePassword(){
   //reset passwordOptions here
   var pwLength = getPasswordLength();
-  var pwCharSet = getCharacterTypesCompact();
+  var pwCharSet = getCharacterTypeChecks();
 
   //actually generate the password
   var passwordBuilder = "";
@@ -115,7 +115,11 @@ function getCharacterTypesCompact(){
 }
 
 
-function getCharacterTypesForm(){
+function getCharacterTypeChecks(){
+  
+}
+
+function CharacterTypesForm(){
   var theForm = createForm();
   //document.body.prepend(theForm);
   var cardBody = document.querySelector(".card-body");
@@ -130,8 +134,13 @@ function createForm(){
   //create container for checklist. Not an actual HTML form.
   var typeForm = document.createElement("div");
   typeForm.className = "typeForm";
-  //typeForm.textContent = "hey I exist"; //DEBUG
+  //typeForm.textContent = "Select Characters to use:"; //DEBUG
   typeForm.setAttribute("style", "background-color:#f5fff5");
+
+  var header= document.createElement("h3");
+  header.id = "CharacterAlert"
+  header.textContent= "Select Characters to use:"
+  typeForm.append(header);
 
   //create checkboxes with labels and containers
   var upperCheck = document.createElement("input");
@@ -179,16 +188,18 @@ function createForm(){
   specContainer.append(specCheck);
   specContainer.append(specLabel);
 
-  //submission button. Not a form input.
+  //submission button. Not a form input. TODO: put it in the form and prevent default!
   var submitButton = document.createElement("button");
   submitButton.id = "submitButton";
   submitButton.textContent = "Submit character selections";
   submitButton.setAttribute("class","btn");
+  var submitContainer = document.createElement("div");
+  submitContainer.append(submitButton);
+  
   // event listener for character sets
   submitButton.addEventListener("click", writePassword);  
   
-  var submitContainer = document.createElement("div");
-  submitContainer.append(submitButton);
+  
 
   //Add all elements to the form
   typeForm.append(upperContainer);
@@ -200,7 +211,8 @@ function createForm(){
   //do any styling
   var formElements = typeForm.children;
   for(i=0;i<formElements.length-1;i++){
-    formElements[i].setAttribute("style","padding-left: 33%");
+    //TODO- this is not responsive
+    formElements[i].setAttribute("style","padding-left: 33%"); 
   }
   submitContainer.setAttribute("style", "text-align: center");
 
@@ -209,4 +221,4 @@ function createForm(){
 
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+generateBtn.addEventListener("click", CharacterTypesForm);
