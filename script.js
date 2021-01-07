@@ -21,7 +21,7 @@ function writePassword() {
 
   
   generateBtn.disabled = false
-  //passwordText.value = password;
+  passwordText.value = password;
 
 }
 
@@ -39,6 +39,14 @@ function generatePassword(){
   }
   console.log(passwordBuilder); //DEBUG
   return passwordBuilder;
+}
+
+function OptionsForm(){
+  var CharacterForm = CharacterTypesForm();
+  var cardBody = document.querySelector(".card-body");
+  
+  cardBody.append(CharacterForm);
+  generateBtn.disabled = true
 }
 
 
@@ -116,21 +124,34 @@ function getCharacterTypesCompact(){
 
 
 function getCharacterTypeChecks(){
-  
+  var totalCharacterSet = [];
+  console.log(totalCharacterSet.length);
+  var upperCase = document.querySelector("#upperCheck").checked;
+  var lowerCase = document.querySelector("#lowerCheck").checked;
+  var numbers = document.querySelector("#numberCheck").checked;
+  var specialChars = document.querySelector("#specCheck").checked;
+
+  console.log(upperCase + " " + lowerCase + " " + numbers +" " + specialChars); //DEBUG
+
+  if(upperCase){
+    totalCharacterSet = totalCharacterSet.concat(characterTypes.upper);
+  }
+  if(lowerCase){
+    totalCharacterSet = totalCharacterSet.concat(characterTypes.lower);
+  }
+  if(numbers){
+    totalCharacterSet = totalCharacterSet.concat(characterTypes.numeric);
+  }
+  if(specialChars){
+    totalCharacterSet = totalCharacterSet.concat(characterTypes.special);
+  }
+
+  //remove the checkbox form
+  document.querySelector(".typeForm").remove();
+  return totalCharacterSet;
 }
 
 function CharacterTypesForm(){
-  var theForm = createForm();
-  //document.body.prepend(theForm);
-  var cardBody = document.querySelector(".card-body");
-  cardBody.append(theForm);
-  generateBtn.disabled = true
-  //var otherContent = document.querySelector(".wrapper");
-  //otherContent.setAttribute("style","display:none");
-
-}
-
-function createForm(){
   //create container for checklist. Not an actual HTML form.
   var typeForm = document.createElement("div");
   typeForm.className = "typeForm";
@@ -221,4 +242,4 @@ function createForm(){
 
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", CharacterTypesForm);
+generateBtn.addEventListener("click", OptionsForm);
