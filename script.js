@@ -1,12 +1,5 @@
 var generateBtn = document.querySelector("#generate");
 
-//object for storing password option input
-//UNUSED
-var passwordOptions = {
-  "charaterSet" : [],
-  "passwordLength" : 0
-}
-
 //object for all possible characters
 var characterTypes = {
   "upper" : ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
@@ -19,11 +12,9 @@ var characterTypes = {
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
   
   generateBtn.disabled = false
   passwordText.value = password;
-
 }
 
 function generatePassword(){
@@ -31,23 +22,15 @@ function generatePassword(){
   var pwLength = getPasswordLength();
   var pwCharSet = getCharacterTypeChecks();
 
-  //console.log(pwCharSet);//DEBUG
-
   //actually generate the password
   var passwordBuilder = "";
-
-  //pwCharSet is an array of arrays. Need to iterate through that pwLength times
   for(var i = 0; i<pwLength; i++){
-    
-    //console.log(pwCharSet[Math.floor(Math.random()*pwCharSet.length)]); //DEBUG
-      var charSetIndex=Math.floor(Math.random()*pwCharSet.length)
-      var singleCharSet=pwCharSet[charSetIndex]
+    var charSetIndex=Math.floor(Math.random()*pwCharSet.length)
+    var singleCharSet=pwCharSet[charSetIndex]
 
-      //console.log(singleCharSet)//DEBUG
-      passwordBuilder = passwordBuilder + singleCharSet[Math.floor(Math.random()*singleCharSet.length)]
-    
+    passwordBuilder = passwordBuilder + singleCharSet[Math.floor(Math.random()*singleCharSet.length)]
   }
-  //console.log(passwordBuilder); //DEBUG
+
   return passwordBuilder;
 }
 
@@ -65,71 +48,7 @@ function getPasswordLength(){
   while (!(inputLength>=8 && inputLength<=128)){
     inputLength = parseInt(prompt("Enter desired password length (8-128). No cancelling!"));
   }
-  //console.log(inputLength); //DEBUG
   return inputLength;
-}
-
-
-function getCharacterTypes(){
-  var upperCase = false;
-  var lowerCase = false;
-  var numbers = false;
-  var specialChars = false;
-  var totalCharacterSet = [];
-
-  //at least one selection must be true
-  while(!upperCase && !lowerCase && !numbers && !specialChars){
-    alert("Please choose at least one set of characters too include in your password. It is recommended to include all.");
-    upperCase = confirm("Include upper case letters?");
-    lowerCase = confirm("Include lower case letters?");
-    numbers = confirm("Include numbers?");
-    specialChars = confirm("Include special characters?");
-  }
-  //console.log(upperCase + " " + lowerCase + " " + numbers +" " + specialChars); //DEBUG
-
-  //mash all the selected character types into one array!
-  if(upperCase){
-    totalCharacterSet.push(characterTypes.upper);
-  }
-  if(lowerCase){
-    totalCharacterSet.push(characterTypes.lower);
-  }
-  if(numbers){
-    totalCharacterSet.push(characterTypes.numeric);
-  }
-  if(specialChars){
-    totalCharacterSet.push(characterTypes.special);
-  }
-
-  //console.log(totalCharacterSet);//DEBUG
-  return totalCharacterSet;
-
-}
-
-
-function getCharacterTypesCompact(){
-  var totalCharacterSet = [];
-
-  //must inclue at least one set of characters.
-  while (totalCharacterSet.length === 0){
-    alert("Please choose at least one set of characters too include in your password. It is recommended to include all.");
-    //Prompt for each character type to include in final set.
-    if(confirm("Include upper case letters?")){
-      totalCharacterSet.push(characterTypes.upper);
-    }
-    if(confirm("Include lower case letters?")){
-      totalCharacterSet.push(characterTypes.lower);
-    }
-    if(confirm("Include numbers?")){
-      totalCharacterSet.push(characterTypes.numeric);
-    }
-    if(confirm("Include special characters?")){
-      totalCharacterSet.push(characterTypes.special);
-    }
-  }
-
-  // console.log(totalCharacterSet);//DEBUG
-  return totalCharacterSet;
 }
 
 
@@ -140,8 +59,6 @@ function getCharacterTypeChecks(){
   var lowerCase = document.querySelector("#lowerCheck").checked;
   var numbers = document.querySelector("#numberCheck").checked;
   var specialChars = document.querySelector("#specCheck").checked;
-
-  // console.log(upperCase + " " + lowerCase + " " + numbers +" " + specialChars); //DEBUG
 
   if(upperCase){
     totalCharacterSet.push(characterTypes.upper);
@@ -162,12 +79,10 @@ function getCharacterTypeChecks(){
 }
 
 
-
 function CharacterTypesForm(){
   //create container for checklist. Not an actual HTML form.
   var typeForm = document.createElement("div");
   typeForm.className = "typeForm";
-  //typeForm.textContent = "Select Characters to use:"; //DEBUG
   typeForm.setAttribute("style", "background-color:#f5fff5");
 
   var header= document.createElement("h3");
@@ -182,7 +97,8 @@ function CharacterTypesForm(){
   specContainer=makeCheckBoxDiv("specCheck","Use special characters");
 
 
-  //submission button. Not a form input. TODO: put it in the form and prevent default!
+  //submission button. Not a form input. 
+  //TODO: put it in the form and prevent default
   var submitButton = document.createElement("button");
   submitButton.id = "submitButton";
   submitButton.textContent = "Submit character selections";
@@ -200,11 +116,11 @@ function CharacterTypesForm(){
   typeForm.append(specContainer);
   typeForm.append(submitContainer);
 
+  //any actions needed for all elements
   var formElements = typeForm.children;
 
   //add listener to checkboxes
   for(i=1;i<formElements.length-1;i++){
-    
     formElements[i].children[0].addEventListener("click",checkboxValidate);
   }
 
@@ -217,6 +133,7 @@ function CharacterTypesForm(){
   return typeForm
 }
 
+//Helper function for the four checkboxes
 function makeCheckBoxDiv(typeID,typeMessage){
   var newCheck = document.createElement("input");
   newCheck.type = "checkbox";
@@ -247,7 +164,6 @@ function checkboxValidate(){
   if(atLeastOne){
     formElements[5].children[0].disabled = false;
     formElements[5].children[0].textContent = "Submit character selections"
-    
   }
   else{
     formElements[5].children[0].disabled = true;
@@ -255,5 +171,5 @@ function checkboxValidate(){
   }
 }
 
-// Add event listener to generate button
+// Add event listener to generate button.
 generateBtn.addEventListener("click", OptionsForm);
