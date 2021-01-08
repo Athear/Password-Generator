@@ -47,7 +47,7 @@ function generatePassword(){
       passwordBuilder = passwordBuilder + singleCharSet[Math.floor(Math.random()*singleCharSet.length)]
     
   }
-  console.log(passwordBuilder); //DEBUG
+  //console.log(passwordBuilder); //DEBUG
   return passwordBuilder;
 }
 
@@ -65,7 +65,7 @@ function getPasswordLength(){
   while (!(inputLength>=8 && inputLength<=128)){
     inputLength = parseInt(prompt("Enter desired password length (8-128). No cancelling!"));
   }
-  console.log(inputLength); //DEBUG
+  //console.log(inputLength); //DEBUG
   return inputLength;
 }
 
@@ -85,7 +85,7 @@ function getCharacterTypes(){
     numbers = confirm("Include numbers?");
     specialChars = confirm("Include special characters?");
   }
-  console.log(upperCase + " " + lowerCase + " " + numbers +" " + specialChars); //DEBUG
+  //console.log(upperCase + " " + lowerCase + " " + numbers +" " + specialChars); //DEBUG
 
   //mash all the selected character types into one array!
   if(upperCase){
@@ -101,7 +101,7 @@ function getCharacterTypes(){
     totalCharacterSet.push(characterTypes.special);
   }
 
-  console.log(totalCharacterSet);//DEBUG
+  //console.log(totalCharacterSet);//DEBUG
   return totalCharacterSet;
 
 }
@@ -128,7 +128,7 @@ function getCharacterTypesCompact(){
     }
   }
 
-  console.log(totalCharacterSet);//DEBUG
+  // console.log(totalCharacterSet);//DEBUG
   return totalCharacterSet;
 }
 
@@ -141,7 +141,7 @@ function getCharacterTypeChecks(){
   var numbers = document.querySelector("#numberCheck").checked;
   var specialChars = document.querySelector("#specCheck").checked;
 
-  console.log(upperCase + " " + lowerCase + " " + numbers +" " + specialChars); //DEBUG
+  // console.log(upperCase + " " + lowerCase + " " + numbers +" " + specialChars); //DEBUG
 
   if(upperCase){
     totalCharacterSet.push(characterTypes.upper);
