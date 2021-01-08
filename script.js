@@ -89,16 +89,16 @@ function getCharacterTypes(){
 
   //mash all the selected character types into one array!
   if(upperCase){
-    totalCharacterSet = totalCharacterSet.concat(characterTypes.upper);
+    totalCharacterSet.push(characterTypes.upper);
   }
   if(lowerCase){
-    totalCharacterSet = totalCharacterSet.concat(characterTypes.lower);
+    totalCharacterSet.push(characterTypes.lower);
   }
   if(numbers){
-    totalCharacterSet = totalCharacterSet.concat(characterTypes.numeric);
+    totalCharacterSet.push(characterTypes.numeric);
   }
   if(specialChars){
-    totalCharacterSet = totalCharacterSet.concat(characterTypes.special);
+    totalCharacterSet.push(characterTypes.special);
   }
 
   console.log(totalCharacterSet);//DEBUG
@@ -115,16 +115,16 @@ function getCharacterTypesCompact(){
     alert("Please choose at least one set of characters too include in your password. It is recommended to include all.");
     //Prompt for each character type to include in final set.
     if(confirm("Include upper case letters?")){
-      totalCharacterSet = totalCharacterSet.concat(characterTypes.upper);
+      totalCharacterSet.push(characterTypes.upper);
     }
     if(confirm("Include lower case letters?")){
-      totalCharacterSet = totalCharacterSet.concat(characterTypes.lower);
+      totalCharacterSet.push(characterTypes.lower);
     }
     if(confirm("Include numbers?")){
-      totalCharacterSet = totalCharacterSet.concat(characterTypes.numeric);
+      totalCharacterSet.push(characterTypes.numeric);
     }
     if(confirm("Include special characters?")){
-      totalCharacterSet = totalCharacterSet.concat(characterTypes.special);
+      totalCharacterSet.push(characterTypes.special);
     }
   }
 
