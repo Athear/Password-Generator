@@ -1,6 +1,7 @@
 var generateBtn = document.querySelector("#generate");
 
 //object for storing password option input
+//UNUSED
 var passwordOptions = {
   "charaterSet" : [],
   "passwordLength" : 0
@@ -30,12 +31,21 @@ function generatePassword(){
   var pwLength = getPasswordLength();
   var pwCharSet = getCharacterTypeChecks();
 
+  //console.log(pwCharSet);//DEBUG
+
   //actually generate the password
   var passwordBuilder = "";
 
+  //pwCharSet is an array of arrays. Need to iterate through that pwLength times
   for(var i = 0; i<pwLength; i++){
+    
     //console.log(pwCharSet[Math.floor(Math.random()*pwCharSet.length)]); //DEBUG
-    passwordBuilder = passwordBuilder + pwCharSet[Math.floor(Math.random()*pwCharSet.length)]
+      var charSetIndex=Math.floor(Math.random()*pwCharSet.length)
+      var singleCharSet=pwCharSet[charSetIndex]
+
+      //console.log(singleCharSet)//DEBUG
+      passwordBuilder = passwordBuilder + singleCharSet[Math.floor(Math.random()*singleCharSet.length)]
+    
   }
   console.log(passwordBuilder); //DEBUG
   return passwordBuilder;
@@ -134,16 +144,16 @@ function getCharacterTypeChecks(){
   console.log(upperCase + " " + lowerCase + " " + numbers +" " + specialChars); //DEBUG
 
   if(upperCase){
-    totalCharacterSet = totalCharacterSet.concat(characterTypes.upper);
+    totalCharacterSet.push(characterTypes.upper);
   }
   if(lowerCase){
-    totalCharacterSet = totalCharacterSet.concat(characterTypes.lower);
+    totalCharacterSet.push(characterTypes.lower);
   }
   if(numbers){
-    totalCharacterSet = totalCharacterSet.concat(characterTypes.numeric);
+    totalCharacterSet.push(characterTypes.numeric);
   }
   if(specialChars){
-    totalCharacterSet = totalCharacterSet.concat(characterTypes.special);
+    totalCharacterSet.push(characterTypes.special);
   }
 
   //remove the checkbox form
@@ -152,21 +162,6 @@ function getCharacterTypeChecks(){
 }
 
 
-function makeCheckBoxDiv(typeID,typeMessage){
-  var newCheck = document.createElement("input");
-  newCheck.type = "checkbox";
-  newCheck.id = typeID;
-  newCheck.name = typeID;
-  newCheck.checked = true;
-  var newLabel = document.createElement("Label")
-  newLabel.setAttribute("for",typeID);
-  newLabel.textContent = typeMessage;
-  var newContainer = document.createElement("div");
-  newContainer.append(newCheck);
-  newContainer.append(newLabel);
-
-  return newContainer
-}
 
 function CharacterTypesForm(){
   //create container for checklist. Not an actual HTML form.
@@ -181,54 +176,11 @@ function CharacterTypesForm(){
   typeForm.append(header);
 
   //create checkboxes with labels and containers
-  // var upperCheck = document.createElement("input");
-  // upperCheck.type = "checkbox";
-  // upperCheck.id = "upperCheck";
-  // upperCheck.name = "upperCheck";
-  // upperCheck.checked = true;
-  // var upperLabel = document.createElement("Label")
-  // upperLabel.setAttribute("for","upperCheck");
-  // upperLabel.textContent = "Use upper case characters";
-  // var upperContainer = document.createElement("div");
-  // upperContainer.append(upperCheck);
-  // upperContainer.append(upperLabel);
-  
-  // var lowerCheck = document.createElement("input");
-  // lowerCheck.type = "checkbox";
-  // lowerCheck.id = "lowerCheck";
-  // lowerCheck.name = "lowerCheck";
-  // lowerCheck.checked = true;
-  // var lowerLabel = document.createElement("Label")
-  // lowerLabel.setAttribute("for","lowerCheck");
-  // lowerLabel.textContent = "Use lower case characters";
-  // var lowerContainer = document.createElement("div")
-  // lowerContainer.append(lowerCheck);
-  // lowerContainer.append(lowerLabel);
+  upperContainer=makeCheckBoxDiv("upperCheck","Use upper case characters");
+  lowerContainer=makeCheckBoxDiv("lowerCheck","Use lower case characters");
+  numberContainer=makeCheckBoxDiv("numberCheck","Use numeric characters");
+  specContainer=makeCheckBoxDiv("specCheck","Use special characters");
 
-
-  // var numberCheck = document.createElement("input");
-  // numberCheck.type = "checkbox";
-  // numberCheck.id = "numberCheck";
-  // numberCheck.name = "numberCheck";
-  // numberCheck.checked = true;
-  // var numberLabel = document.createElement("Label")
-  // numberLabel.setAttribute("for","numberCheck");
-  // numberLabel.textContent = "Use numeric characters";
-  // numberContainer = document.createElement("div")
-  // numberContainer.append(numberCheck);
-  // numberContainer.append(numberLabel);
-
-  // var specCheck = document.createElement("input");
-  // specCheck.type = "checkbox";
-  // specCheck.id = "specCheck";
-  // specCheck.name = "specCheck";
-  // specCheck.checked = true;
-  // var specLabel = document.createElement("Label")
-  // specLabel.setAttribute("for","specCheck");
-  // specLabel.textContent = "Use special characters";
-  // var specContainer = document.createElement("div")
-  // specContainer.append(specCheck);
-  // specContainer.append(specLabel);
 
   //submission button. Not a form input. TODO: put it in the form and prevent default!
   var submitButton = document.createElement("button");
@@ -240,11 +192,6 @@ function CharacterTypesForm(){
   
   // event listener for character sets
   submitButton.addEventListener("click", writePassword);  
-  
-  upperContainer=makeCheckBoxDiv("upperCheck","Use upper case characters");
-  lowerContainer=makeCheckBoxDiv("lowerCheck","Use lower case characters");
-  numberContainer=makeCheckBoxDiv("numberCheck","Use numeric characters");
-  specContainer=makeCheckBoxDiv("specCheck","Use special characters");
 
   //Add all elements to the form
   typeForm.append(upperContainer);
@@ -268,6 +215,22 @@ function CharacterTypesForm(){
   }
   submitContainer.setAttribute("style", "text-align: center");
   return typeForm
+}
+
+function makeCheckBoxDiv(typeID,typeMessage){
+  var newCheck = document.createElement("input");
+  newCheck.type = "checkbox";
+  newCheck.id = typeID;
+  newCheck.name = typeID;
+  newCheck.checked = true;
+  var newLabel = document.createElement("Label")
+  newLabel.setAttribute("for",typeID);
+  newLabel.textContent = typeMessage;
+  var newContainer = document.createElement("div");
+  newContainer.append(newCheck);
+  newContainer.append(newLabel);
+
+  return newContainer
 }
 
 function checkboxValidate(){
